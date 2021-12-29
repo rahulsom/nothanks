@@ -9,3 +9,7 @@
  */
 
 rootProject.name = "nothanks"
+
+include("nothanks-server")
+include("nothanks-client")
+include("nothanks-cli")

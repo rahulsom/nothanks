@@ -1,0 +1,77 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: rahulsom
+    changes:
+    - createTable:
+        tableName: appuser
+        columns:
+        - column:
+            name: id
+            type: uuid
+            constraints:
+            - primaryKey: true
+        - column:
+            name: username
+            type: varchar(255)
+            constraints:
+            - unique: true
+        - column:
+            name: password
+            type: varchar(255)
+        - column:
+            name: state
+            type: varchar(255)
+        - column:
+            name: activegameid
+            type: uuid
+        - column:
+            name: datecreated
+            type: datetime
+        - column:
+            name: dateupdated
+            type: datetime
+- changeSet:
+    id: 2
+    author: rahulsom
+    changes:
+    - createTable:
+        tableName: gamewrapper
+        columns:
+        - column:
+            name: id
+            type: uuid
+            constraints:
+            - primaryKey: true
+        - column:
+            name: game
+            type: varchar
+        - column:
+            name: finished
+            type: boolean
+        - column:
+            name: datecreated
+            type: datetime
+        - column:
+            name: dateupdated
+            type: datetime
+- changeSet:
+    id: 3
+    author: rahulsom
+    changes:
+    - createIndex:
+        indexName: appuser_username_idx
+        tableName: appuser
+        columns:
+        - column:
+            name: username
+- changeSet:
+    id: 4
+    author: rahulsom
+    changes:
+    - createIndex:
+        indexName: appuser_state_idx
+        tableName: appuser
+        columns:
+        - column:
+            name: state

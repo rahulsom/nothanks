@@ -1,24 +1,13 @@
-buildscript {
-  repositories {
-    gradlePluginPortal()
-  }
-}
-
 plugins {
-  kotlin("jvm") version "1.6.10"
+  id("nebula.release") version "16.0.0"
+  id("org.openapi.generator") version "5.3.0" apply false
+  id("org.jetbrains.kotlin.jvm") version "1.6.0" apply false
 }
 
-repositories {
-  mavenCentral()
-}
+allprojects {
+  repositories {
+    mavenCentral()
+  }
 
-dependencies {
-  testImplementation(platform("org.junit:junit-bom:5.8.2"))
-  testImplementation("org.junit.jupiter:junit-jupiter-api")
-  testImplementation("org.junit.jupiter:junit-jupiter-params")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-}
-
-tasks.withType<Test> {
-  useJUnitPlatform()
+  group = "com.github.rahulsom"
 }

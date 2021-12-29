@@ -10,15 +10,16 @@
 
 # Gradle template
 /.gradle
-/build/
+**/build/
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
 
-.newt-cache/
-choco/nflx-carson/tools/carson.zip
-
+# Eclipse/VS Code
 /.classpath
 /.project
 /.settings
 /bin
+
+# Heap Dumps
+**/hs_err_pid*.log
