@@ -96,3 +96,7 @@ kapt {
     arg("micronaut.openapi.views.spec", "redoc.enabled=true,rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop")
   }
 }
+
+tasks.withType<Test> {
+  useJUnitPlatform()
+}
