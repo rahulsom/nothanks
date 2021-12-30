@@ -23,3 +23,7 @@ gradle-app.setting
 
 # Heap Dumps
 **/hs_err_pid*.log
+
+## Python Things
+nothanks-python/venv
+nothanks-python/.idea

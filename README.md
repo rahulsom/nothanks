@@ -27,7 +27,7 @@ Run the server
 
 Visit the [api docs](http://localhost:8080/swagger/views/rapidoc/).
 
-## Fastest way to connect
+### Connecting using the java cli
 
 Build the client shadowjar.
 
@@ -48,3 +48,14 @@ java \
 If not, it will take.
 
 You will need to run multiple clients - at least 3 for the game to start.
+
+### Connecting using the python cli
+
+This is a currently a `AlwaysTake` player.
+The hope is to make this much smarter than that.
+
+```shell
+cd nothanks-python
+python3 -m venv venv && ./venv/bin/pip3 install -r requirements.txt # Only the first time
+./venv/bin/python3 python_client.py http://localhost:8080 rahulsom1 rahulsom1
+```
