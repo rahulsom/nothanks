@@ -27,7 +27,7 @@ dependencies {
   api("com.squareup.retrofit2:retrofit:2.9.0")
   implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
   implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-  implementation("io.swagger:swagger-annotations:1.5.22")
+  implementation("io.swagger:swagger-annotations:1.6.4")
   implementation("com.google.code.findbugs:jsr305:3.0.2")
   implementation("org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.1") {
     exclude("org.apache.oltu.oauth2", "org.apache.oltu.oauth2.common")
