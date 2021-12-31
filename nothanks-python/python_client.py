@@ -179,6 +179,8 @@ def play_game_with_agent(agent):
             if game_state['turn']:
                 if should_print_game:
                     print(print_game(game_state))
+                top_card = game_state['topCard']
+                tokens_on_card = game_state['tokensOnCard']
                 if game_state['canPass']:
                     if should_observe:
                         agent.observe(terminal=False)
@@ -190,17 +192,14 @@ def play_game_with_agent(agent):
 
                     should_observe = True
                     if action:
-                        if should_print_game:
-                            print("    -> Advice is Take.")
+                        print(f"  -> Advice is Take {top_card} with {tokens_on_card} tokens.")
                         requests.post(f'{base_url}/v1/game/take?gameId={game_id}', auth=auth)
                     else:
-                        if should_print_game:
-                            print("    -> Advice is Pass.")
+                        print(f"  -> Advice is Pass {top_card} with {tokens_on_card} + 1 tokens.")
                         requests.post(f'{base_url}/v1/game/pass?gameId={game_id}', auth=auth)
 
                 else:
-                    if should_print_game:
-                        print("    -> Cannot Pass. Will Take.")
+                    print(f"  -> Cannot Pass. Will Take {top_card} with {tokens_on_card} tokens.")
                     requests.post(f'{base_url}/v1/game/take?gameId={game_id}', auth=auth)
 
 
