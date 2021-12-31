@@ -57,5 +57,5 @@ The hope is to make this much smarter than that.
 ```shell
 cd nothanks-python
 python3 -m venv venv && ./venv/bin/pip3 install -r requirements.txt # Only the first time
-./venv/bin/python3 python_client.py http://localhost:8080 rahulsom1 rahulsom1
+./venv/bin/python3 python_client.py http://localhost:8080 rahulsom1 rahulsom1 20
 ```

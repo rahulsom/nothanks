@@ -12,5 +12,5 @@ python3 -m venv venv
 ## Running
 
 ```shell
-./venv/bin/python3 python_client.py http://localhost:8080 <username> <password>
+./venv/bin/python3 python_client.py http://localhost:8080 <username> <password> <runs>
 ```

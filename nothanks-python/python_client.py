@@ -3,10 +3,11 @@ import time
 import requests
 from requests.auth import HTTPBasicAuth
 
-assert len(sys.argv) == 4
+assert len(sys.argv) == 5
 base_url = sys.argv[1]
 username = sys.argv[2]
 password = sys.argv[3]
+runs = int(sys.argv[4])
 
 auth = HTTPBasicAuth(username, password)
 
@@ -75,11 +76,12 @@ def wait_to_idle():
 
 
 def main():
-    signin_or_signup()
+    if runs > 0:
+        signin_or_signup()
     game_count = 0
     my_score = 0
     wins = 0
-    while game_count < 20:
+    while game_count < runs:
         game_count = game_count + 1
         game_score = play_game()
         if game_score > 0:
