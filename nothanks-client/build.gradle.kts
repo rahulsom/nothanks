@@ -32,7 +32,7 @@ dependencies {
   implementation("org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.1") {
     exclude("org.apache.oltu.oauth2", "org.apache.oltu.oauth2.common")
   }
-  implementation("io.gsonfire:gson-fire:1.8.0")
+  implementation("io.gsonfire:gson-fire:1.8.5")
   implementation("org.threeten:threetenbp:1.4.0")
   implementation("jakarta.annotation:jakarta.annotation-api:2.0.0")
   implementation("javax.annotation:javax.annotation-api:1.3.2")
