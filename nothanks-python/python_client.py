@@ -50,15 +50,12 @@ def play_game():
     user_should_be_idle()
     start_new_game()
     game_id = wait_for_game_to_start()
-    last_state = {}
-    print("")
     while True:
         game_state = requests.get(f'{base_url}/v1/game/state?gameId={game_id}', auth=auth).json()
-        if last_state != game_state:
-            print(game_state)
-            last_state = game_state
         if 'result' in game_state:
-            if game_state['result']['winner'] == username:
+            is_winner = game_state['result']['winner'] == username
+            print(f"{game_state['result']['scores']} - {is_winner}")
+            if is_winner:
                 return 1
             else:
                 return -1
