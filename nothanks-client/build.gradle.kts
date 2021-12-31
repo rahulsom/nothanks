@@ -24,7 +24,7 @@ tasks.getByName("openApiGenerate")
 tasks.getByName("compileJava").dependsOn("openApiGenerate")
 
 dependencies {
-  api("com.squareup.retrofit2:retrofit:2.3.0")
+  api("com.squareup.retrofit2:retrofit:2.9.0")
   implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
   implementation("com.squareup.retrofit2:converter-gson:2.9.0")
   implementation("io.swagger:swagger-annotations:1.5.22")
