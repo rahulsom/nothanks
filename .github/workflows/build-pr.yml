@@ -48,7 +48,7 @@ jobs:
           cd nothanks-python
           python3 -m venv venv
           ./venv/bin/pip3 install -r requirements.txt
-          ./venv/bin/python3 python_client.py http://localhost:8080 user user 0
+          ./venv/bin/python3 python_client.py http://localhost:8080 user user tensorforce 0
 
       - id: get-comment-body
         if: always()

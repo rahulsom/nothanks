@@ -12,5 +12,13 @@ python3 -m venv venv
 ## Running
 
 ```shell
-./venv/bin/python3 python_client.py http://localhost:8080 <username> <password> <runs>
+./venv/bin/python3 python_client.py http://localhost:8080 <username> <password> <brain> <runs>
 ```
+
+where `brain` is one of
+
+* `AlwaysTake` - Takes any card presented to it
+* `PreferPass` - Prefer to pass if possible. Otherwise take any card.
+* `random` - Randomly choose to take or pass.
+* `tensorforce` - Use TensorForce to choose to take or pass.
+* `ppo` - Use PPO to choose to take or pass.
