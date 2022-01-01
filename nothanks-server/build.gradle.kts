@@ -4,7 +4,7 @@ plugins {
   id("org.jetbrains.kotlin.plugin.allopen") version "1.6.10"
   id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
   id("com.github.johnrengelman.shadow") version "7.1.2"
-  id("io.micronaut.application") version "3.0.2"
+  id("io.micronaut.application") version "3.1.1"
   id("com.google.cloud.tools.jib") version "2.8.0"
 }
 
