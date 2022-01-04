@@ -66,7 +66,7 @@ class NoThanksService(
 
   fun createGames() {
     val waitingUsers = userRepository.findAllByState(AppUser.UserState.WAITING)
-    createGames(waitingUsers)
+    createGames(waitingUsers.shuffled())
   }
 
   private tailrec fun createGames(waitingUsers: List<AppUser>, gamesCreated: Int = 0): Int {
