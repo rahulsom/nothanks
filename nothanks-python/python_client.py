@@ -111,6 +111,30 @@ def to_tf_state(game_state):
     return dict(observation=tuple(ret))
 
 
+def to_row(wi, u, a, c, t, scores):
+    if wi == u:
+        if u == username:
+            w = "++"
+        else:
+            w = "+"
+    else:
+        w = " "
+
+    my_score = ''.rjust(4)
+    if scores is not None:
+        for s in scores:
+            if s['name'] == u:
+                my_score = str(s['score']).rjust(4)
+
+    ua = f"{u} ({a})"
+    if t > 0:
+        ts = f" - {'*' * t}"
+    else:
+        ts = ""
+
+    return f"{w.ljust(3)}{ua.ljust(25)}{my_score} - {c}{ts}"
+
+
 def print_game(game_state):
     '''
     Turns game_state to a string that can be printed.
@@ -130,30 +154,15 @@ def print_game(game_state):
         ret = ret + ' ' + str(game_state['topCard']) + ' ' + ('*' * game_state['tokensOnCard']) + '\n'
 
     if 'myCards' in game_state:
-        my_score = ''.rjust(4)
-        if scores is not None:
-            for s in scores:
-                if s['name'] == username:
-                    my_score = str(s['score']).rjust(4)
-        if winner == username:
-            ret = ret + f"+ {my_score} {username} : {game_state['myCards']}: {'*' * game_state['myTokens']}"
-        else:
-            ret = ret + f"  {my_score} {username} : {game_state['myCards']}: {'*' * game_state['myTokens']}"
+        ret = ret + to_row(winner, username, brain, game_state['myCards'], game_state['myTokens'], scores)
     else:
-        ret = ret + f"  {username} : {game_state['myTokens']}"
+        ret = ret + to_row(winner, username, brain, [], game_state['myTokens'], scores)
 
     for other_player in game_state['otherCards']:
-        my_score = ''.rjust(4)
-        if scores is not None:
-            for s in scores:
-                if s['name'] == other_player['name']:
-                    my_score = str(s['score']).rjust(4)
-        if winner == other_player['name']:
-            ret = ret + f"\n+ {my_score} {other_player['name']} : "
-        else:
-            ret = ret + f"\n  {my_score} {other_player['name']} : "
         if 'cards' in other_player:
-            ret = ret + f"{other_player['cards']}"
+            ret = ret + '\n' + to_row(winner, other_player['name'], '', other_player['cards'], 0, scores)
+        else:
+            ret = ret + '\n' + to_row(winner, other_player['name'], '', [], 0, scores)
     return ret
 
 
@@ -192,14 +201,14 @@ def play_game_with_agent(agent):
 
                     should_observe = True
                     if action:
-                        print(f"  -> Advice is Take {top_card} with {tokens_on_card} tokens.")
+                        # print(f"  -> Advice is Take {top_card} with {tokens_on_card} tokens.")
                         requests.post(f'{base_url}/v1/game/take?gameId={game_id}', auth=auth)
                     else:
-                        print(f"  -> Advice is Pass {top_card} with {tokens_on_card} + 1 tokens.")
+                        # print(f"  -> Advice is Pass {top_card} with {tokens_on_card} + 1 tokens.")
                         requests.post(f'{base_url}/v1/game/pass?gameId={game_id}', auth=auth)
 
                 else:
-                    print(f"  -> Cannot Pass. Will Take {top_card} with {tokens_on_card} tokens.")
+                    # print(f"  -> Cannot Pass. Will Take {top_card} with {tokens_on_card} tokens.")
                     requests.post(f'{base_url}/v1/game/take?gameId={game_id}', auth=auth)
 
 
@@ -292,10 +301,7 @@ def main():
     game_count = 0
     wins = 0
 
-    if os.path.isdir(f'data/{username}-{brain}'):
-        agent = Agent.load(directory='data/checkpoints', format='numpy')
-    else:
-        agent = make_agent()
+    agent = make_agent()
 
     history = []
 
@@ -312,9 +318,7 @@ def main():
         print(f"Wins: {wins}/{game_count}:  {''.join(history)}\n\n")
         wait_to_idle()
 
-    if agent is not None:
-        agent.save(directory=f'data/{username}-{brain}', format='numpy', append='episodes')
-        agent.close()
+    agent.close()
 
 
 if __name__ == '__main__':
