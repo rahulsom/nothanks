@@ -10,8 +10,8 @@ base_url = sys.argv[1]
 username = sys.argv[2]
 password = sys.argv[3]
 brain = sys.argv[4]
-if brain not in ['AlwaysTake', 'PreferPass', 'random', 'tensorforce', 'ppo']:
-    raise ValueError('brain must be one of: AlwaysTake, PreferPass, random, tensorforce, ppo')
+if brain not in ['AlwaysTake', 'PreferPass', 'random', 'tensorforce', 'ppo', 'dqn', 'ddqn']:
+    raise ValueError(f'brain must be one of: {brain}')
 runs = int(sys.argv[5])
 
 auth = HTTPBasicAuth(username, password)
@@ -127,7 +127,7 @@ def print_game(game_state):
     ret = ''
     ret = ret + ('X' * game_state['stackSize'])
     if 'topCard' in game_state:
-        ret = ret +' '+ str(game_state['topCard']) + ' ' + ('*' * game_state['tokensOnCard']) + '\n'
+        ret = ret + ' ' + str(game_state['topCard']) + ' ' + ('*' * game_state['tokensOnCard']) + '\n'
 
     if 'myCards' in game_state:
         my_score = ''.rjust(4)
@@ -216,21 +216,41 @@ def wait_to_idle():
 def make_agent():
     if brain == 'tensorforce':
         return Agent.create(
-            agent=brain,
-            memory=10000,
+            agent='tensorforce',
             states=dict(
                 observation=dict(type="int", shape=35, num_values=55),
             ),
             actions=dict(type="bool", shape=1),
             update=dict(unit='timesteps', batch_size=64),
             optimizer=dict(type='adam', learning_rate=1e-3),
-            policy=dict(network='auto'),
             objective='policy_gradient',
             reward_estimation=dict(horizon=20)
         )
     elif brain == 'ppo':
         return Agent.create(
             agent='ppo',
+            states=dict(
+                observation=dict(type="int", shape=35, num_values=55),
+            ),
+            actions=dict(type="bool", shape=1),
+            batch_size=10, learning_rate=1e-3,
+            max_episode_timesteps=100,
+        )
+    elif brain == 'dqn':
+        return Agent.create(
+            agent='dqn',
+            memory=10000,
+            states=dict(
+                observation=dict(type="int", shape=35, num_values=55),
+            ),
+            actions=dict(type="bool", shape=1),
+            batch_size=10, learning_rate=1e-3,
+            max_episode_timesteps=100,
+        )
+    elif brain == 'ddqn':
+        return Agent.create(
+            agent='ddqn',
+            memory=10000,
             states=dict(
                 observation=dict(type="int", shape=35, num_values=55),
             ),
@@ -272,7 +292,10 @@ def main():
     game_count = 0
     wins = 0
 
-    agent = make_agent()
+    if os.path.isdir(f'data/{username}-{brain}'):
+        agent = Agent.load(directory='data/checkpoints', format='numpy')
+    else:
+        agent = make_agent()
 
     history = []
 
@@ -290,6 +313,7 @@ def main():
         wait_to_idle()
 
     if agent is not None:
+        agent.save(directory=f'data/{username}-{brain}', format='numpy', append='episodes')
         agent.close()
 
 
