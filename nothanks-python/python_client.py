@@ -301,7 +301,10 @@ def main():
     game_count = 0
     wins = 0
 
-    agent = make_agent()
+    if os.path.exists(f'data/{brain}-{username}'):
+        agent = Agent.load(f'data/{brain}-{username}')
+    else:
+        agent = make_agent()
 
     history = []
 
@@ -318,6 +321,7 @@ def main():
         print(f"Wins: {wins}/{game_count}:  {''.join(history)}\n\n")
         wait_to_idle()
 
+    agent.save(f'data/{brain}-{username}')
     agent.close()
 
 
