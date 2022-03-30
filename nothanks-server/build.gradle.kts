@@ -41,7 +41,7 @@ dependencies {
   implementation("io.micronaut.liquibase:micronaut-liquibase")
 
   runtimeOnly("ch.qos.logback:logback-classic")
-  runtimeOnly("com.mattbertolini:liquibase-slf4j:4.0.0")
+  runtimeOnly("com.mattbertolini:liquibase-slf4j:4.1.0")
   runtimeOnly("org.postgresql:postgresql")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
