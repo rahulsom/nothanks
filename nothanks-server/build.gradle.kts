@@ -2,7 +2,7 @@ plugins {
   id("org.jetbrains.kotlin.jvm")
   id("org.jetbrains.kotlin.kapt")
   id("org.jetbrains.kotlin.plugin.allopen") version "1.6.20"
-  id("org.jetbrains.kotlin.plugin.jpa") version "1.6.10"
+  id("org.jetbrains.kotlin.plugin.jpa") version "1.6.20"
   id("com.github.johnrengelman.shadow") version "7.1.2"
   id("io.micronaut.application") version "3.3.2"
   id("com.google.cloud.tools.jib") version "3.2.1"
