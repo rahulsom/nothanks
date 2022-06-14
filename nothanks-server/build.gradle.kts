@@ -53,7 +53,7 @@ dependencies {
   testImplementation("org.testcontainers:postgresql")
   testImplementation("org.testcontainers:testcontainers")
 
-  testRuntimeOnly("com.h2database:h2:2.1.212")
+  testRuntimeOnly("com.h2database:h2:2.1.214")
 }
 
 application {
