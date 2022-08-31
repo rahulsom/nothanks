@@ -5,7 +5,7 @@ plugins {
   id("org.jetbrains.kotlin.plugin.jpa") version "1.7.10"
   id("com.github.johnrengelman.shadow") version "7.1.2"
   id("io.micronaut.application") version "3.5.1"
-  id("com.google.cloud.tools.jib") version "3.2.1"
+  id("com.google.cloud.tools.jib") version "3.3.0"
 }
 
 val kotlinVersion = project.properties.get("kotlinVersion")
