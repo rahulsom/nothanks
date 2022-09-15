@@ -11,7 +11,7 @@ dependencies {
   implementation("org.fusesource.jansi:jansi:2.4.0")
   implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
-  runtimeOnly("ch.qos.logback:logback-classic:1.4.0")
+  runtimeOnly("ch.qos.logback:logback-classic:1.4.1")
 
 }
 
