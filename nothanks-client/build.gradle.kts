@@ -36,7 +36,7 @@ dependencies {
   implementation("org.threeten:threetenbp:1.6.3")
   implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
   implementation("javax.annotation:javax.annotation-api:1.3.2")
-  implementation("org.openapitools:jackson-databind-nullable:0.2.3")
+  implementation("org.openapitools:jackson-databind-nullable:0.2.4")
 
   testImplementation("junit:junit:4.13.2")
 }
