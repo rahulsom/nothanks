@@ -1,7 +1,7 @@
 plugins {
   id("nebula.release") version "17.1.0"
   id("org.openapi.generator") version "6.2.1" apply false
-  id("org.jetbrains.kotlin.jvm") version "1.7.22" apply false
+  id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
 }
 
 allprojects {
